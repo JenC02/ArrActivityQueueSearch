@@ -1,8 +1,12 @@
 // ==UserScript==
 // @name         ArrActivityQueueSearch
 // @namespace    arr-activity-queue-search
-// @version      0.1.3
-// @description  Adds a search button for unlinked queue rows in Radarr and Sonarr
+// @version      0.2.0
+// @description  Adds a search button for unlinked activity queue elements in Radarr and Sonarr
+// @homepageURL  https://github.com/JenC02/ArrActivityQueueSearch
+// @supportURL   https://github.com/JenC02/ArrActivityQueueSearch/issues
+// @downloadURL  https://raw.githubusercontent.com/JenC02/ArrActivityQueueSearch/main/ArrActivityQueueSearch.user.js
+// @updateURL    https://raw.githubusercontent.com/JenC02/ArrActivityQueueSearch/main/ArrActivityQueueSearch.user.js
 // @match        http://localhost:7878/*
 // @match        http://localhost:8989/*
 // @grant        none
@@ -17,7 +21,13 @@
 (function () {
     "use strict";
 
-    const isSonarr = location.port === "9602";
+    const appIdentityText = [
+        document.title,
+        document.querySelector('meta[name="description"]')?.content,
+        document.querySelector("img[alt]")?.alt,
+    ].filter(Boolean).join(" ");
+
+    const isSonarr = /sonarr/i.test(appIdentityText);
     const appName = isSonarr ? "Sonarr" : "Radarr";
 
     let queueObserver = null;
