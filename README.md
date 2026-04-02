@@ -24,24 +24,24 @@ Install the Tampermonkey browser extension.
 
 ### 2. Install the script
 
-For automatic installation click [here](./ArrActivityQueueSearch.user.js) and Tampermonkey should open its install screen. Confirm the installation.
+For automatic installation open [ArrActivityQueueSearch.user.js](./ArrActivityQueueSearch.user.js) and click the `[RAW]` button at the top. Tampermonkey should open its install screen. Confirm the installation.
 
-Alternatively copy the code from the script file: `ArrActivityQueueSearch.user.js`, open the Tampermonkey dashboard, click the `[+]` button to create a new script, delete the default content, paste the code and and save the file.
+Alternatively copy the code, open the Tampermonkey dashboard, click the `[+]` button to create a new script, delete the default content, paste the code and and save the file.
 
 ## Configuration
 
-This script is intentionally configured with safe default `@match` entries for localhost.
+This script is intentionally configured with safe default `@match` entries for localhost and the default ports.
 
-If your Radarr/Sonarr instances are reachable on different IPs, hostnames, or ports, configure Tampermonkey so the script is injected on those URLs too.
+If your Radarr/Sonarr instances are reachable on different IPs, hostnames, or ports, configure Tampermonkey so the script is injected on those URLs too:
 
 - Open the Tamplermonkey Dashboard` → `Installed Userscripts` and edit the script.
 - Open the scripts `Settings` tab and add `Includes/Excludes` → `User matches`: `IP:Port` your Sonarr and Radarr instances are reachable at. 
 
 Examples:
 
-- `http://192.168.200.50:7878/*`
+- `192.168.200.50:7878/*`
 - `http://192.168.200.50:8989/*`
-- `http://radarr.local:7878/*`
+- `radarr.local:7878/*`
 - `http://sonarr.local:8989/*`
 
-You can also edit the script header and add extra `@match` lines manually but those will be overridden on updates.
+You can also edit the script header and add extra `@match` lines manually but those will be overridden when the script is updated.
