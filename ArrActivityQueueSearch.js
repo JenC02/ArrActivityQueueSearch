@@ -1,13 +1,18 @@
 // ==UserScript==
 // @name         ArrActivityQueueSearch
 // @namespace    arr-activity-queue-search
-// @version      0.1.0
+// @version      0.1.3
 // @description  Adds a search button for unlinked queue rows in Radarr and Sonarr
-// @match        http://192.168.12.2:9603/activity/queue*
-// @match        http://192.168.12.2:9602/activity/queue*
+// @match        http://localhost:7878/*
+// @match        http://localhost:8989/*
 // @grant        none
 // @run-at       document-idle
 // ==/UserScript==
+
+// NOTE: To setup go to the `Tamplermonkey Dashboard` --> `Installed Userscripts` and edit the script.
+// Open the scripts `Settings` tab and add `Includes/Excludes` --> `User matches`:
+// IP:Port/* your Sonarr and Radarr instances are reachable at (eg. `192.168.200.50:7878/*` means, the
+// script will be injected on any page that matches this address).
 
 (function () {
     "use strict";
@@ -15,17 +20,91 @@
     const isSonarr = location.port === "9602";
     const appName = isSonarr ? "Sonarr" : "Radarr";
 
-    injectStyles();
-    scanRows();
+    let queueObserver = null;
+    let routeWatcherStarted = false;
 
-    const observer = new MutationObserver(() => {
+    init();
+
+    // Starts the userscript and hooks into SPA navigation.
+    function init() {
+        injectStyles();
+        watchRouteChanges();
+        handleRouteChange();
+    }
+
+    // Returns true only on the queue page.
+    function isQueuePage() {
+        return location.pathname === "/activity/queue";
+    }
+
+    // Starts queue-specific DOM watching.
+    function startQueueObserver() {
+        if (queueObserver) return;
+
         scanRows();
-    });
 
-    observer.observe(document.body, {
-        childList: true,
-        subtree: true,
-    });
+        queueObserver = new MutationObserver(() => {
+            if (!isQueuePage()) return;
+            scanRows();
+        });
+
+        queueObserver.observe(document.body, {
+            childList: true,
+            subtree: true,
+        });
+    }
+
+    // Stops queue-specific DOM watching when leaving the queue page.
+    function stopQueueObserver() {
+        if (!queueObserver) return;
+        queueObserver.disconnect();
+        queueObserver = null;
+    }
+
+    // Enables or disables queue features depending on the current route.
+    function handleRouteChange() {
+        if (isQueuePage()) {
+            startQueueObserver();
+            scanRows();
+        } else {
+            stopQueueObserver();
+        }
+    }
+
+    // Hooks into pushState/replaceState/popstate so route changes inside the SPA are detected.
+    function watchRouteChanges() {
+        if (routeWatcherStarted) return;
+        routeWatcherStarted = true;
+
+        const notify = () => {
+            setTimeout(handleRouteChange, 0);
+        };
+
+        const originalPushState = history.pushState;
+        history.pushState = function (...args) {
+            const result = originalPushState.apply(this, args);
+            notify();
+            return result;
+        };
+
+        const originalReplaceState = history.replaceState;
+        history.replaceState = function (...args) {
+            const result = originalReplaceState.apply(this, args);
+            notify();
+            return result;
+        };
+
+        window.addEventListener("popstate", notify);
+
+        // Fallback for apps that mutate the DOM before/without history hooks being obvious.
+        let lastPath = location.pathname;
+        setInterval(() => {
+            if (location.pathname !== lastPath) {
+                lastPath = location.pathname;
+                handleRouteChange();
+            }
+        }, 500);
+    }
 
     // Injects the CSS used by the status/tool icon groups.
     function injectStyles() {
