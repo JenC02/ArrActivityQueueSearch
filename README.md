@@ -34,7 +34,7 @@ This script is intentionally configured with safe default `@match` entries for l
 
 If your Radarr/Sonarr instances are reachable on different IPs, hostnames, or ports, configure Tampermonkey so the script is injected on those URLs too:
 
-- Open the Tamplermonkey Dashboard` → `Installed Userscripts` and edit the script.
+- Open the `Tamplermonkey Dashboard` → `Installed Userscripts` and edit the script.
 - Open the scripts `Settings` tab and add `Includes/Excludes` → `User matches`: `IP:Port` your Sonarr and Radarr instances are reachable at. 
 
 Examples:
