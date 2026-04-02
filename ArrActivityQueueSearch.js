@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         ArrActivityQueueSearch
-// @namespace    local.queue.search
-// @version      0.0.2
+// @namespace    arr-activity-queue-search
+// @version      0.0.5
 // @description  Adds a search button for unlinked queue rows in Radarr and Sonarr
 // @match        http://192.168.12.2:9603/activity/queue*
 // @match        http://192.168.12.2:9602/activity/queue*
@@ -27,7 +27,7 @@
     subtree: true,
   });
 
-  // Injects the CSS used by the search icon button and the no-wrap icon group.
+  // Injects the CSS used by the search icon button, moved user button, and the no-wrap icon group.
   function injectStyles() {
     if (document.getElementById("tm-queue-search-style")) return;
 
@@ -41,7 +41,8 @@
             white-space: nowrap;
         }
 
-        .tm-queue-search-icon-btn {
+        .tm-queue-search-icon-btn,
+        .tm-queue-moved-user-btn {
             margin-left: 6px;
             padding: 0;
             width: 18px;
@@ -58,11 +59,13 @@
             flex: 0 0 auto;
         }
 
-        .tm-queue-search-icon-btn:hover {
+        .tm-queue-search-icon-btn:hover,
+        .tm-queue-moved-user-btn:hover {
             opacity: 1;
         }
 
-        .tm-queue-search-icon-btn svg {
+        .tm-queue-search-icon-btn svg,
+        .tm-queue-moved-user-btn svg {
             width: 13px;
             height: 13px;
             display: block;
@@ -141,7 +144,7 @@
     return button;
   }
 
-  // Wraps the existing status icon and the new search icon into a single no-wrap container.
+  // Wraps the existing status icon and the new icons into a single no-wrap container.
   function ensureIconGroup(statusCell) {
     let group = statusCell.querySelector(".tm-queue-search-icon-group");
     if (group) return group;
@@ -158,7 +161,28 @@
     return group;
   }
 
-  // Scans queue rows and adds a search icon for rows whose title is plain text, not a link.
+  // Finds the existing user button in the actions cell and moves it next to the search button.
+  function moveUserButtonToIconGroup(row, group) {
+    if (!group) return;
+
+    if (group.querySelector(".tm-queue-moved-user-btn")) return;
+
+    const cells = row.querySelectorAll("td");
+    if (!cells.length) return;
+
+    const actionsCell = cells[cells.length - 1];
+    if (!actionsCell) return;
+
+    const userIcon = actionsCell.querySelector('svg[data-icon="user"]');
+    const userButton = userIcon ? userIcon.closest("button") : null;
+
+    if (!userButton) return;
+
+    userButton.classList.add("tm-queue-moved-user-btn");
+    group.appendChild(userButton);
+  }
+
+  // Scans queue rows, always moves the user button, and only adds a search icon for plain-text titles.
   function scanRows() {
     const rows = document.querySelectorAll("tr");
 
@@ -170,24 +194,26 @@
       const titleCell = cells[2];
 
       if (!statusCell || !titleCell) continue;
-      if (statusCell.querySelector(".tm-queue-search-icon-btn")) continue;
 
-      // linked title = already matched item, skip
+      const group = ensureIconGroup(statusCell);
+      if (!group) continue;
+
+      // Always move the user button, regardless of whether the title is linked.
+      moveUserButtonToIconGroup(row, group);
+
+      // If title is already a link, do not add a search button.
       if (titleCell.querySelector("a")) continue;
 
       const rawTitle = titleCell.textContent.trim();
       if (!rawTitle) continue;
 
-      const searchTerm = normalizeSearchTerm(rawTitle);
-      if (!searchTerm) continue;
+      // Only add the search button once.
+      if (!statusCell.querySelector(".tm-queue-search-icon-btn")) {
+        const searchTerm = normalizeSearchTerm(rawTitle);
+        if (!searchTerm) continue;
 
-      const button = createSearchButton(searchTerm);
-      const group = ensureIconGroup(statusCell);
-
-      if (group) {
+        const button = createSearchButton(searchTerm);
         group.appendChild(button);
-      } else {
-        statusCell.appendChild(button);
       }
     }
   }
