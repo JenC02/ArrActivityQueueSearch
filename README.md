@@ -45,3 +45,7 @@ Examples:
 - `http://sonarr.local:8989/*`
 
 You can also edit the script header and add extra `@match` lines manually but those will be overridden when the script is updated.
+
+## Attribution
+
+This project was realised with the help of LLMs.
