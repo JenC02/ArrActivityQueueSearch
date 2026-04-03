@@ -2,6 +2,8 @@
 
 Adds a search button for unlinked activity queue elements in **Radarr** and **Sonarr**.
 
+![alt text](resources/demo.png)
+
 ## What it does
 
 For queue rows that are not matched cleanly, the script will:
