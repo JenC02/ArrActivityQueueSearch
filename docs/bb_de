@@ -21,7 +21,7 @@ Der Suchbegriff wird automatisch bereinigt durch:
 [b]Installation[/b]
 [list=1]
 [*]Installiere die Browser-Erweiterung [b]Tampermonkey[/b]
-[*]Öffne [b][url=https://anonym.es/?RAW_SCRIPT[/url][/b]
+[*]Öffne [b][url=https://anonym.es/?<RAW_SCRIPT>]ArrActivityQueueSearch.user.js[/url][/b]
 [*]Tampermonkey sollte die Installationsseite automatisch öffnen
 [*]Bestätige die Installation
 [/list]
@@ -47,5 +47,5 @@ http://sonarr.local:8989/activity/queue
 [/code]
 Du kannst auch zusätzliche @match-Zeilen manuell im Script-Header hinzufügen, aber beachte, dass diese beim Aktualisieren des Scripts überschrieben werden können.
 
-[b][url=https://anonym.es/?REPO_URL]GitHub-Projektseite[/url][/b]
+[b][url=https://anonym.es/?<REPO_URL>]GitHub-Projektseite[/url][/b]
 [hr]

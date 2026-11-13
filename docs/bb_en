@@ -19,7 +19,7 @@ The search term is cleaned up automatically by:
 [b]Installation[/b]
 [list=1]
 [*]Install the [b]Tampermonkey[/b] browser extension
-[*]Open [b][url=https://anonym.es/?RAW_SCRIPT]ArrActivityQueueSearch.user.js[/url][/b]
+[*]Open [b][url=https://anonym.es/?<RAW_SCRIPT>]ArrActivityQueueSearch.user.js[/url][/b]
 [*]Tampermonkey should open the install page automatically
 [*]Confirm the installation
 [/list]
@@ -46,5 +46,5 @@ http://sonarr.local:8989/activity/queue
 You can also add extra @match lines manually in the script header, but keep in mind those may be overwritten when the script gets updated.
 
 
-[b][url=https://anonym.es/?REPO_URL]GitHub Project Page[/url][/b]
+[b][url=https://anonym.es/?<REPO_URL>]GitHub Project Page[/url][/b]
 [hr]
