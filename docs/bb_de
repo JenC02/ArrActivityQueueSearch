@@ -1,0 +1,51 @@
+[size=30][b]ArrActivityQueueSearch[/b][/size]
+[hr]
+Fügt einen Suchbutton für nicht verknüpfte Aktivitätswarteschlangen-Elemente in [b]Radarr[/b] und [b]Sonarr[/b] hinzu.
+
+Ein Tampermonkey-Userscript, das bei Warteschlangeneinträgen hilft, die nicht sauber zugeordnet werden (z. B. wenn sie zum Client hinzugefügt wurden, aber noch kein Eintrag in Radarr/Sonarr existiert).
+
+Für betroffene Zeilen in der Aktivitätswarteschlange fügt das Script direkt neben dem Statussymbol einen [b]Suchbutton[/b] hinzu und verschiebt außerdem den vorhandenen Benutzer-/Details-Button dorthin.
+Anstatt den Namen von Hand zu kopieren, kannst du einfach auf den neuen Suchbutton klicken und direkt zur Hinzufügen-/Suchseite springen
+[URL=https://imgbox.com/BhyhNXHr][IMG]https://thumbs4.imgbox.com/80/5d/BhyhNXHr_t.png[/IMG][/URL]
+
+[b]Dateinamen-Bereinigung / Normalisierung[/b]
+Der Suchbegriff wird automatisch bereinigt durch:
+[list]
+[*]Ersetzen von ., _ und - durch Leerzeichen
+[*]Ersetzen von ae, oe, ue durch ä, ö, ü
+[*]Entfernen von Staffel-/Episoden-Markern wie S01, S01E02 oder Season 1
+[*]Abschneiden von allem nach dem ersten erkannten Jahr
+[/list]
+
+
+[b]Installation[/b]
+[list=1]
+[*]Installiere die Browser-Erweiterung [b]Tampermonkey[/b]
+[*]Öffne [b][url=https://anonym.es/?RAW_SCRIPT[/url][/b]
+[*]Tampermonkey sollte die Installationsseite automatisch öffnen
+[*]Bestätige die Installation
+[/list]
+Wenn du möchtest, kannst du auch manuell ein neues Userscript im Tampermonkey-Dashboard erstellen, den Code einfügen und speichern.
+
+
+[b]Konfiguration[/b]
+Das Script enthält sichere Standard-@match-Einträge für localhost und die Standard-Ports von Radarr/Sonarr.
+Falls deine Instanzen über andere IPs, Hostnamen oder Ports erreichbar sind, füge in Tampermonkey eigene Matches hinzu:
+[list]
+[*]Öffne das [b]Tampermonkey Dashboard[/b]
+[*]Gehe zu [b]Installed Userscripts[/b]
+[*]Bearbeite das Script
+[*]Öffne den Tab [b]Settings[/b] des Scripts
+[*]Füge unter [b]Includes/Excludes[/b] → [b]User matches[/b] deine benutzerdefinierten Matches hinzu
+[/list]
+Beispiele:
+[code]
+192.168.178.50:7878/activity/queue/*
+http://192.168.178.50:8989/activity/queue/*
+radarr.local:7878/activity/queue/*
+http://sonarr.local:8989/activity/queue/*
+[/code]
+Du kannst auch zusätzliche @match-Zeilen manuell im Script-Header hinzufügen, aber beachte, dass diese beim Aktualisieren des Scripts überschrieben werden können.
+
+[b][url=https://anonym.es/?REPO_URL]GitHub-Projektseite[/url][/b]
+[hr]

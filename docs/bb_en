@@ -1,0 +1,50 @@
+Adds a search button for unlinked activity queue elements in [b]Radarr[/b] and [b]Sonarr[/b].
+
+This is a Tampermonkey userscript that helps with queue entries that do not get matched cleanly (eg. when added to the client but no entry in Radarr/Sonarr yet).
+
+For affected rows in the activity queue, the script adds a [b]search button[/b] right next to the status icon and moves the existing user/details button there as well.
+Instead of copying the name by hand, you can just click the new search button and jump straight into the add/search page
+[URL=https://imgbox.com/BhyhNXHr][IMG]https://thumbs4.imgbox.com/80/5d/BhyhNXHr_t.png[/IMG][/URL]
+
+[b]Filename cleanup / normalization[/b]
+The search term is cleaned up automatically by:
+[list]
+[*]replacing ., _, and - with spaces
+[*]replacing ae, oe, ue with ä, ö, ü
+[*]removing season / episode markers like S01, S01E02, or Season 1
+[*]trimming everything after the first detected year
+[/list]
+
+
+[b]Installation[/b]
+[list=1]
+[*]Install the [b]Tampermonkey[/b] browser extension
+[*]Open [b][url=https://anonym.es/?RAW_SCRIPT]ArrActivityQueueSearch.user.js[/url][/b]
+[*]Tampermonkey should open the install page automatically
+[*]Confirm the installation
+[/list]
+If you prefer, you can also create a new userscript manually in the Tampermonkey dashboard, paste the code, and save it.
+
+
+[b]Configuration[/b]
+The script comes with safe default @match entries for localhost and the default Radarr/Sonarr ports.
+If your instances use different IPs, hostnames, or ports, add your own matches in Tampermonkey:
+[list]
+[*]Open [b]Tampermonkey Dashboard[/b]
+[*]Go to [b]Installed Userscripts[/b]
+[*]Edit the script
+[*]Open the script’s [b]Settings[/b] tab
+[*]Add your custom [b]Includes/Excludes[/b] → [b]User matches[/b]
+[/list]
+Examples:
+[code]
+192.168.178.50:7878/activity/queue/*
+http://192.168.178.50:8989/activity/queue/*
+radarr.local:7878/activity/queue/*
+http://sonarr.local:8989/activity/queue/*
+[/code]
+You can also add extra @match lines manually in the script header, but keep in mind those may be overwritten when the script gets updated.
+
+
+[b][url=https://anonym.es/?REPO_URL]GitHub Project Page[/url][/b]
+[hr]

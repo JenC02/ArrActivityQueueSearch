@@ -1,22 +1,23 @@
 // ==UserScript==
 // @name         ArrActivityQueueSearch
 // @namespace    arr-activity-queue-search
-// @version      0.2.0
+// @version      0.2.1
 // @description  Adds a search button for unlinked activity queue elements in Radarr and Sonarr
-// @homepageURL  https://github.com/JenC02/ArrActivityQueueSearch
-// @supportURL   https://github.com/JenC02/ArrActivityQueueSearch/issues
-// @downloadURL  https://raw.githubusercontent.com/JenC02/ArrActivityQueueSearch/main/ArrActivityQueueSearch.user.js
-// @updateURL    https://raw.githubusercontent.com/JenC02/ArrActivityQueueSearch/main/ArrActivityQueueSearch.user.js
-// @match        http://localhost:7878/*
-// @match        http://localhost:8989/*
+// @author       <OWNER>
+// @homepageURL  <REPO_URL>
+// @supportURL   <REPO_URL>/issues
+// @downloadURL  <RAW_SCRIPT>
+// @updateURL    <RAW_SCRIPT>
+// @match        http://localhost:7878/activity/queue/*
+// @match        http://localhost:8989/activity/queue/*
 // @grant        none
 // @run-at       document-idle
 // ==/UserScript==
 
 // NOTE: To setup go to the `Tamplermonkey Dashboard` --> `Installed Userscripts` and edit the script.
 // Open the scripts `Settings` tab and add `Includes/Excludes` --> `User matches`:
-// IP:Port/* your Sonarr and Radarr instances are reachable at (eg. `192.168.200.50:7878/*` means, the
-// script will be injected on any page that matches this address).
+// IP:Port/* your Sonarr and Radarr instances are reachable at (eg. `192.168.178.50:7878/*` means, the
+// script will be injected on any page that matches this pattern).
 
 (function () {
     "use strict";
