@@ -21,9 +21,9 @@ For queue rows that are not matched cleanly, the script will:
 ## Installation
 
 1. Install the [Tampermonkey](https://www.tampermonkey.net/) browser extension.
-2. Try installing the script automatically by opening the raw [`ArrActivityQueueSearch.user.js`](ArrActivityQueueSearch.user.js) URL. Tampermonkey should open its install screen. If this fails:
+2. Try installing the script automatically by opening the raw [`ArrActivityQueueSearch.user.js`](https://github.com/JenC02/ArrActivityQueueSearch/raw/refs/heads/main/ArrActivityQueueSearch.user.js) URL. Tampermonkey should open its install screen. If this fails:
    1. Click the Tampermonkey icon → `Create a new script`
-   2. Replace the template content with the contents of [`ArrActivityQueueSearch.user.js`](ArrActivityQueueSearch.user.js).
+   2. Replace the template content with the contents of [`ArrActivityQueueSearch.user.js`](https://github.com/JenC02/ArrActivityQueueSearch/raw/refs/heads/main/ArrActivityQueueSearch.user.js).
    3. Save the script (Ctrl+S).
    4. Visit/reload your Radarr/ Sonarr queue page.
 3. Configure the script according to the next section

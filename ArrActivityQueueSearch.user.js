@@ -3,11 +3,11 @@
 // @namespace    arr-activity-queue-search
 // @version      0.2.2
 // @description  Adds a search button for unlinked activity queue elements in Radarr and Sonarr
-// @author       <OWNER>
-// @homepageURL  <REPO_URL>
-// @supportURL   <REPO_URL>/issues
-// @downloadURL  <RAW_SCRIPT>
-// @updateURL    <RAW_SCRIPT>
+// @author       JenC02
+// @homepageURL  https://github.com/JenC02/ArrActivityQueueSearch
+// @supportURL   https://github.com/JenC02/ArrActivityQueueSearch/issues
+// @downloadURL  https://github.com/JenC02/ArrActivityQueueSearch/raw/refs/heads/main/ArrActivityQueueSearch.user.js
+// @updateURL    https://github.com/JenC02/ArrActivityQueueSearch/raw/refs/heads/main/ArrActivityQueueSearch.user.js
 // @match        http://*:7878/activity/queue
 // @match        http://*:8989/activity/queue
 // @grant        none
