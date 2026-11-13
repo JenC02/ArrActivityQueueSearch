@@ -38,10 +38,10 @@ If your instances use different IPs, hostnames, or ports, add your own matches i
 [/list]
 Examples:
 [code]
-192.168.178.50:7878/activity/queue/*
-http://192.168.178.50:8989/activity/queue/*
-radarr.local:7878/activity/queue/*
-http://sonarr.local:8989/activity/queue/*
+192.168.178.50:7878/activity/queue
+http://192.168.178.50:8989/activity/queue
+radarr.local:7878/activity/queue
+http://sonarr.local:8989/activity/queue
 [/code]
 You can also add extra @match lines manually in the script header, but keep in mind those may be overwritten when the script gets updated.
 

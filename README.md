@@ -30,23 +30,38 @@ For queue rows that are not matched cleanly, the script will:
 
 ## Configuration
 
-This script is intentionally configured with safe default `@match` entries for localhost and the default ports.
+This script is intentionally configured with generic default `@match` entries for the default ports.
 
 If your Radarr/Sonarr instances are reachable on different IPs, hostnames, or ports, configure Tampermonkey so the script is injected on those URLs too:
 
 - Open the `Tamplermonkey Dashboard` → `Installed Userscripts` and edit the script.
 - Open the scripts `Settings` tab and add `Includes/Excludes` → `User matches`: `IP:Port` your Sonarr and Radarr instances are reachable at.
 
+> [!NOTE]
+> You can also edit the script header and add extra `@match` lines manually but those will be overridden when the script is updated.
+
 Examples:
 
-- `192.168.178.50:7878/activity/queue/*`
-- `http://192.168.178.50:8989/activity/queue/*`
-- `radarr.local:7878/activity/queue/*`
-- `http://sonarr.local:8989/activity/queue/*`
-- `https://radarr.home.arpa/activity/queue/*`
-- `https://sonarr.home.arpa/activity/queue/*`
+- HostIP:Port
 
-You can also edit the script header and add extra `@match` lines manually but those will be overridden when the script is updated.
+    ```text
+    http://192.168.178.50:7878/activity/queue
+    http://192.168.178.50:8989/activity/queue
+    ```
+
+- .local
+
+    ```text
+    radarr.local:7878/activity/queue
+    sonarr.local:8989/activity/queue
+    ```
+
+- reverse proxy
+
+    ```text
+    https://radarr.home.arpa/activity/queue
+    https://sonarr.home.arpa/activity/queue
+    ```
 
 > [!NOTE]
 > Adding User matches without disabling Original matches does **not** replace the default rules; it only adds to it.

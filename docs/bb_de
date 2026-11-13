@@ -40,10 +40,10 @@ Falls deine Instanzen über andere IPs, Hostnamen oder Ports erreichbar sind, f�
 [/list]
 Beispiele:
 [code]
-192.168.178.50:7878/activity/queue/*
-http://192.168.178.50:8989/activity/queue/*
-radarr.local:7878/activity/queue/*
-http://sonarr.local:8989/activity/queue/*
+192.168.178.50:7878/activity/queue
+http://192.168.178.50:8989/activity/queue
+radarr.local:7878/activity/queue
+http://sonarr.local:8989/activity/queue
 [/code]
 Du kannst auch zusätzliche @match-Zeilen manuell im Script-Header hinzufügen, aber beachte, dass diese beim Aktualisieren des Scripts überschrieben werden können.
 
